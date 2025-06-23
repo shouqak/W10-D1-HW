@@ -1,8 +1,8 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router"
 import Signup from "../Pages/Signup"
-import Signin from "../Pages/Signin"
 import HomePage from "../Pages/Home"
 import Landing from "../Pages/landing"
+import Signin from "../Pages/Signin"
 
 
 
