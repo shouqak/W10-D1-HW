@@ -1,76 +1,79 @@
-import React, { FormEvent, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import React, { FormEvent, useEffect, useState } from "react"
+import { useParams, useNavigate } from "react-router"
 
 export default function HomePage() {
-  const { token } = useParams<{ token: string }>();
-  const navigate = useNavigate();
+  const { token } = useParams({ token: string })
+  const navigate = useNavigate()
 
-  const [lat, setLat] = useState("");
-  const [lon, setLon] = useState("");
-  const [weatherData, setWeatherData] = useState<any>(null); 
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [lat, setLat] = useState("")
+  const [lon, setLon] = useState("")
+  const [weatherData, setWeatherData] = useState < any > null
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (!token) {
-      console.warn("No token found. Redirecting to login...");
-      navigate("/login");
+      console.warn("No token found. Redirecting to login...")
+      navigate("/login")
     } else {
       //console.log("Token received:", token);
     }
-  }, [token, navigate]);
+  }, [token, navigate])
 
-  const handleSubmit = async (e: FormEvent) => {
-  e.preventDefault(); 
+  const handleSubmit = async () => {
+    e.preventDefault()
 
-  setError("");
-  setWeatherData(null);
-  setLoading(true);
+    setError("")
+    setWeatherData(null)
+    setLoading(true)
 
-  if (!lat || !lon) {
-    setError("Please enter both latitude and longitude.");
-    setLoading(false);
-    return;
-  }
-
-  if (isNaN(Number(lat)) || isNaN(Number(lon))) {
-    setError("Latitude and Longitude must be valid numbers.");
-    setLoading(false);
-    return;
-  }
-
-  try {
-    const response = await fetch(
-      `https://weather-api-k5we.onrender.com/weather?lat=${lat}&lon=${lon}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch weather data");
+    if (!lat || !lon) {
+      setError("Please enter both latitude and longitude.")
+      setLoading(false)
+      return
     }
 
-    const data = await response.json();
+    if (isNaN(Number(lat)) || isNaN(Number(lon))) {
+      setError("Latitude and Longitude must be valid numbers.")
+      setLoading(false)
+      return
+    }
 
-    setWeatherData(data);
-  } catch (err) {
-    console.error("Fetch error:", err);
-    setError("Failed to fetch weather data. Please check the api.");
-  } finally {
-    setLoading(false);
+    try {
+      const response = await fetch(
+        `https://weather-api-k5we.onrender.com/weather?lat=${lat}&lon=${lon}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch weather data")
+      }
+
+      const data = await response.json()
+
+      setWeatherData(data)
+    } catch (err) {
+      console.error("Fetch error:", err)
+      setError("Failed to fetch weather data. Please check the api.")
+    } finally {
+      setLoading(false)
+    }
   }
-};
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
       <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
         <h1 className="text-2xl font-bold text-center mb-6">🌤️ Weather Info</h1>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4"
+        >
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Latitude
@@ -152,5 +155,5 @@ export default function HomePage() {
         )}
       </div>
     </div>
-  );
+  )
 }
