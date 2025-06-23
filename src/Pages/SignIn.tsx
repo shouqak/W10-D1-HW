@@ -1,11 +1,9 @@
-import axios from "axios";
-import React, { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
-import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
+import React, { useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
+import { SlArrowLeft } from 'react-icons/sl';
 import { Link, useNavigate } from "react-router";
 
-
-export default function Signin() {
+function Signin() {
  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -139,5 +137,7 @@ export default function Signin() {
         </div>
       </section>
     </>
-  );
+  )
 }
+
+export default Signin
