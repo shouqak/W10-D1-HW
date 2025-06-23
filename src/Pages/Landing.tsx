@@ -20,7 +20,7 @@ function Landing() {
             Sign Up
           </Link>
           <Link
-            to="/auth/login"
+            to="/auth/signin"
             className="px-6 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white/20 transition text-center"
           >
             Sign In

@@ -5,7 +5,7 @@ import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { Link, useNavigate } from "react-router";
 
 
-export default function Login() {
+export default function Signin() {
  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -129,7 +129,7 @@ export default function Login() {
             <p className="text-center mt-4 text-sm">
               Don't have an account?{" "}
               <Link
-                to="/Signup"
+                to="/auth/Signup"
                 className="text-blue-500 hover:underline font-medium"
               >
                 Sign up
